@@ -1,31 +1,29 @@
 // 3p
-// import { hashPassword } from '@foal/core';
 import { createConnection } from 'typeorm';
-
-// App
 import { User } from '../app/entities';
 
 export const schema = {
   additionalProperties: false,
   properties: {
-    // email: { type: 'string', format: 'email' },
-    // password: { type: 'string' },
+    email: { type: 'string' },
+    name: { type: 'string' },
+    password: { type: 'string' }
   },
-  required: [ /* 'email', 'password' */ ],
+  required: [ 'email', 'name', 'password' ],
   type: 'object',
 };
 
-export async function main(/*args*/) {
+export async function main({ email, name, password }: {email: string; name: string; password: string }) {
   const connection = await createConnection();
 
   try {
     const user = new User();
-    // user.email = args.email;
-    // user.password = await hashPassword(args.password);
-
+    user.email = email;
+    user.name = name;    
+    await user.setPassword(password);
     console.log(await user.save());
   } catch (error) {
-    console.log(error.message);
+    console.error(error);
   } finally {
     await connection.close();
   }

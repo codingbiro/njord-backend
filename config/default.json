@@ -2,12 +2,19 @@
   "port": "env(PORT)",
   "settings": {
     "loggerFormat": "tiny",
-    "session": {
-      "store": "@foal/typeorm"
+    "jwt": {
+      "secret": "DfQMen/8OrFn0j3s2ilMzRFXw4ZNaOX9jpbXYPhEN78=",
+      "secretEncoding": "base64"
     }
+
   },
   "database": {
-    "type": "better-sqlite3",
-    "database": "./db.sqlite3"
-  }
+    "type": "postgres",
+    "host": "env(DB_HOST)",
+    "port": "env(DB_PORT)",
+    "username": "env(DB_USERNAME)",
+    "password": "env(DB_PASSWORD)",
+    "database": "env(DB_NAME)"
+  },
+  "frontendUrl": "env(FRONTEND_URL)"
 }

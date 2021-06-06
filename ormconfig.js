@@ -1,4 +1,4 @@
-const { Config } = require('@foal/core');
+const { Config } = require ('@foal/core');
 
 module.exports = {
   type: Config.getOrThrow('database.type', 'string'),
@@ -10,8 +10,8 @@ module.exports = {
   password: Config.get('database.password', 'string'),
   database: Config.get('database.database', 'string'),
 
-  dropSchema: Config.get('database.dropSchema', 'boolean', false),
-  synchronize: Config.get('database.synchronize', 'boolean', false),
+  dropSchema: Config.get('database.dropSchema', 'boolean', true),
+  synchronize: Config.get('database.synchronize', 'boolean', true),
 
   entities: ["build/app/**/*.entity.js"],
   migrations: ["build/migrations/*.js"],
