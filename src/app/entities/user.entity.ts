@@ -1,5 +1,8 @@
 import { hashPassword } from '@foal/core';
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+
+import { Company } from './company.entity';
+import { UserRole } from './user-role.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -15,6 +18,15 @@ export class User extends BaseEntity {
 
   @Column({ nullable: true })
   password?: string;
+
+  @Column({ default: true })
+  active: boolean;
+
+  @ManyToOne(() => UserRole, { lazy: true })
+  role: Promise<UserRole> | UserRole;
+
+  @ManyToOne(() => Company, { lazy: true })
+  company: Promise<Company> | Company;
 
   async setPassword(password: string) {
     this.password = await hashPassword(password);

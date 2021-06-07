@@ -1,3 +1,6 @@
 {
-  
+    "database": {
+      "dropSchema": "false",
+      "synchronize": "false"
+    }  
 }

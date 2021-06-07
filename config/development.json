@@ -2,5 +2,9 @@
   "settings": {
     "debug": true,
     "loggerFormat": "dev"
+  },
+  "database": {
+    "dropSchema": "true",
+    "synchronize": "true"
   }
 }

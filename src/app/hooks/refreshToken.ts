@@ -16,11 +16,7 @@ export function RefreshJWT(): HookDecorator {
       }
 
       const newToken = sign(
-        {
-          email: ctx.user.email,
-          id: ctx.user.id,
-          sub: ctx.user.id.toString(),
-        },
+        { sub: ctx.user.id.toString(), id: ctx.user.id, email: ctx.user.email, name: ctx.user.name },
         getSecretOrPrivateKey(),
         { expiresIn: '1h' }
       );

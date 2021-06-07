@@ -19,9 +19,9 @@
     "makemigrations": "foal rmdir build && tsc -p tsconfig.app.json && npx typeorm migration:generate --name migration && tsc -p tsconfig.app.json",
     "migrations": "npx typeorm migration:run",
     "revertmigration": "npx typeorm migration:revert",
-    "createuser": "foal run create-user email=test@example.com name=Test password=admin",
-    "createproposals": "foal run create-proposals title1=WebDeveloper title2=AccountManager",
-    "mockdata": "npm run createuser && npm run createproposals"
+    "createuser": "foal run create-user email=user@example.com name=User password=admin company=1",
+    "createcompany": "foal run create-company name=TestCompany",
+    "mockdata": "npm run createcompany && npm run createuser"
   },
   "engines": {
     "node": ">=10"

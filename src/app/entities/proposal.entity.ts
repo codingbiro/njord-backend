@@ -1,4 +1,6 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+
+import { Company } from './company.entity';
 
 @Entity()
 export class Proposal extends BaseEntity {
@@ -9,4 +11,7 @@ export class Proposal extends BaseEntity {
   @Column()
   title: string;
 
+  @ManyToOne(() => Company, { lazy: true })
+  company: Promise<Company> | Company;
+    
 }
