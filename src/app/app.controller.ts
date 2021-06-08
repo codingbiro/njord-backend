@@ -1,7 +1,7 @@
 import { controller, IAppController, HttpResponseNoContent, Hook, Options, Config, Context, Get, HttpResponseOK, dependency, ServiceManager } from '@foal/core';
 import { JWTOptional } from '@foal/jwt';
 
-import { AuthController, ProposalController } from './controllers';
+import { AuthController, JobController } from './controllers';
 import { RefreshJWT } from './hooks/refreshToken';
 import { InitDb } from './services';
 
@@ -16,7 +16,7 @@ export class AppController implements IAppController {
 
   subControllers = [
     controller('/auth', AuthController),
-    controller('/proposal', ProposalController),
+    controller('/job', JobController),
   ];
 
   async init() {

@@ -1,6 +1,6 @@
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-import { Proposal } from './proposal.entity';
+import { Job } from './job.entity';
 import { User } from './user.entity';
 
 @Entity()
@@ -15,7 +15,7 @@ export class Company extends BaseEntity {
   @OneToMany(() => User, user => user.company, { lazy: true })
   users: Promise<User[]> | User[];
 
-  @OneToMany(() => Proposal, proposal => proposal.company, { lazy: true })
-  proposals: Promise<Proposal[]> | Proposal[];
+  @OneToMany(() => Job, job => job.company, { lazy: true })
+  acceptedJobs: Promise<Job[]> | Job[];
 
 }

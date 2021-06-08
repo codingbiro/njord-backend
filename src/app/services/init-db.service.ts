@@ -1,6 +1,6 @@
 import { dependency } from '@foal/core';
 import { Connection } from 'typeorm';
-import { Company, Proposal, User, UserRole } from '../entities';
+import { Company, Job, User, UserRole } from '../entities';
 
 export class InitDb {
   @dependency
@@ -9,8 +9,8 @@ export class InitDb {
   get companyRepository() {
     return this.connection.getRepository(Company);
   }
-  get proposalRepository() {
-    return this.connection.getRepository(Proposal);
+  get jobRepository() {
+    return this.connection.getRepository(Job);
   }
   get userRepository() {
     return this.connection.getRepository(User);
@@ -22,8 +22,9 @@ export class InitDb {
   async run() {
     const company = await this.createCompany();
     const userRole = await this.createUserRole();
-    await this.createUser(company, userRole);
-    await this.createProposal(company);
+    await this.createUser('test', userRole, company);
+    const boatUser = await this.createUser('boat', userRole);
+    await this.createJobs(boatUser);
   }
 
   createCompany() {
@@ -38,20 +39,21 @@ export class InitDb {
     return this.userRoleRepository.save(role);
   }
   
-  async createUser(company: Company, userRole: UserRole) {
+  async createUser(name: string, userRole: UserRole, company?: Company) {
     const user = this.userRepository.create();
-    user.email = 'test@example.com';
-    user.company = company;
-    user.name = 'Test User';
+    user.email = `${name}@example.com`;
+    if (company) user.company = company;
+    user.name = name;
     user.role = userRole;
     await user.setPassword('admin');
     return this.userRepository.save(user);
   }
 
-  createProposal(company: Company) {
-    const proposal = this.proposalRepository.create();
-    proposal.title = 'Test Proposal';
-    proposal.company = company;
-    return this.proposalRepository.save(proposal);
+  async createJobs(boatUser: User) {
+    const date = new Date();
+    const jobs = [{ user: boatUser, boatType: 'Motor Boat', service: 'Engine Repair', boatLocation: 'Copenhagen', createdAt: date, dueDate: new Date(date.getTime() + 86400000), isEmergency: false }]
+    for (const job of jobs) {
+      await this.jobRepository.save(this.jobRepository.create(job));
+    }
   }
 }

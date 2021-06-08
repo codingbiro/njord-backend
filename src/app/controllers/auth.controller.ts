@@ -39,7 +39,6 @@ export class AuthController {
   })
   whoami(context: Context<User>) {
     if (context.user) {
-      console.log(context.user);
       return new HttpResponseOK({ id: context.user.id, email: context.user.email, name: context.user.name });
     }
     return new HttpResponseUnauthorized();
