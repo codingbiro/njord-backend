@@ -16,3 +16,10 @@ Runs at http://localhost:3001.
 
 The application has linting set up. Usage:
 ### `npm run lint`
+
+## Database creation/run
+
+There is a VSCode Task set up for running the db in a Docker Container.\
+*Note: Docker is required.*
+
+### `Run Task > Start backend db`
