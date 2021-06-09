@@ -21,6 +21,7 @@ The application has linting set up. Usage:
 
 There is a VSCode Task set up for running the db in a Docker Container.\
 *Note: Docker is required.*
+*If you wish to not use VSCode, you can also run the following command:* `docker-compose -f .docker/docker-compose.local.yml --project-name njord-backend up -d db`
 
 ### `Run Task > Start backend db`
 
@@ -30,3 +31,11 @@ The needed credentials can be found in the `.env` file and the **config** direct
 To test the application, an auto generated user may be used:
 email: `test@example.com`
 password: `admin`
+
+## API Endpoints
+- POST **/auth/login**: log in using email and password
+- GET **/auth/whoami**: returns the currently logged in user from context
+- GET **/job/all?rejected=true&location=Lyngby**: returns all jobs or accepts query params to filter the jobs
+- GET **/job/locations**: returns all locations that are set on jobs (returns an unique list)
+- POST **/job/accept**: accepts the job that is sent in the request's body (identified by the object's id)
+- POST **/job/accept**: rejects the job that is sent in the request's body (identified by the object's id)
