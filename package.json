@@ -33,6 +33,7 @@
     "typeorm": "0.2.26"
   },
   "devDependencies": {
+    "@foal/cli": "2.4.0",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/mocha": "7.0.2",
     "@types/node": "10.17.24",

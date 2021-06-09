@@ -23,3 +23,10 @@ There is a VSCode Task set up for running the db in a Docker Container.\
 *Note: Docker is required.*
 
 ### `Run Task > Start backend db`
+
+## Credentials
+The needed credentials can be found in the `.env` file and the **config** directory.
+
+To test the application, an auto generated user may be used:
+email: `test@example.com`
+password: `admin`
