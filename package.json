@@ -27,7 +27,6 @@
     "@foal/core": "^2.0.0",
     "@foal/jwt": "^2.4.0",
     "@foal/typeorm": "^2.0.0",
-    "better-sqlite3": "~7.1.2",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.6.0",
     "source-map-support": "~0.5.19",
