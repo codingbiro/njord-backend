@@ -18,10 +18,7 @@
     "lint:fix": "eslint --ext ts --fix src",
     "makemigrations": "foal rmdir build && tsc -p tsconfig.app.json && npx typeorm migration:generate --name migration && tsc -p tsconfig.app.json",
     "migrations": "npx typeorm migration:run",
-    "revertmigration": "npx typeorm migration:revert",
-    "createuser": "foal run create-user email=user@example.com name=User password=admin company=1",
-    "createcompany": "foal run create-company name=TestCompany",
-    "mockdata": "npm run createcompany && npm run createuser"
+    "revertmigration": "npx typeorm migration:revert"
   },
   "engines": {
     "node": ">=10"

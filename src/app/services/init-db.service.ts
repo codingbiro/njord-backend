@@ -2,6 +2,8 @@ import { dependency } from '@foal/core';
 import { Connection } from 'typeorm';
 import { Company, Job, User, UserRole } from '../entities';
 
+const MS_TO_DAY = 86400000;
+
 export class InitDb {
   @dependency
   connection: Connection;
@@ -22,8 +24,8 @@ export class InitDb {
   async run() {
     const company = await this.createCompany();
     const userRole = await this.createUserRole();
-    await this.createUser('test', userRole, company);
-    const boatUser = await this.createUser('boat', userRole);
+    await this.createUser('Test User', userRole, company);
+    const boatUser = await this.createUser('Boat User', userRole);
     await this.createJobs(boatUser);
   }
 
@@ -41,7 +43,7 @@ export class InitDb {
   
   async createUser(name: string, userRole: UserRole, company?: Company) {
     const user = this.userRepository.create();
-    user.email = `${name}@example.com`;
+    user.email = `${name.split(' ')[0].toLowerCase()}@example.com`;
     if (company) user.company = company;
     user.name = name;
     user.role = userRole;
@@ -51,7 +53,11 @@ export class InitDb {
 
   async createJobs(boatUser: User) {
     const date = new Date();
-    const jobs = [{ user: boatUser, boatType: 'Motor Boat', service: 'Engine Repair', boatLocation: 'Copenhagen', createdAt: date, dueDate: new Date(date.getTime() + 86400000), isEmergency: false }]
+    const jobs = [
+      { user: boatUser, boatType: 'Motor Boat', service: 'Engine Repair', boatLocation: 'Copenhagen', createdAt: date, dueDate: new Date(date.getTime() + MS_TO_DAY), isEmergency: false },
+      { user: boatUser, boatType: 'Sail Boat', service: 'Painting', boatLocation: 'Lyngby', createdAt: date, dueDate: new Date(date.getTime() + (MS_TO_DAY * 2)), isEmergency: true },
+      { user: boatUser, boatType: 'Motor Boat', service: 'Windshield', boatLocation: 'Lyngby', createdAt: date, dueDate: new Date(date.getTime() + (MS_TO_DAY * 3)), isEmergency: false },
+    ];
     for (const job of jobs) {
       await this.jobRepository.save(this.jobRepository.create(job));
     }

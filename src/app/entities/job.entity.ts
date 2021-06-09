@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Company } from './company.entity';
 import { User } from './user.entity';
@@ -9,13 +9,16 @@ export class Job extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ default: false })
   isEmergency: boolean;
 
-  @Column()
+  @Column({ default: false })
+  isDone: boolean;
+
+  @CreateDateColumn({ type: 'timestamp with time zone' })
   createdAt: Date;
 
-  @Column()
+  @Column({ type: 'timestamp with time zone' })
   dueDate: Date;
 
   @Column()
@@ -30,7 +33,7 @@ export class Job extends BaseEntity {
   @ManyToOne(() => User, { lazy: true })
   user: Promise<User> | User;
 
-  @ManyToOne(() => Company, { lazy: true })
-  company: Promise<Company> | Company;
-    
+  @ManyToOne(() => Company, { lazy: true, nullable: true })
+  company?: Promise<Company> | Company;
+ 
 }

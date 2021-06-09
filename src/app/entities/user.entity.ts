@@ -16,10 +16,10 @@ export class User extends BaseEntity {
   @Column()
   name: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, select: false })
   password?: string;
 
-  @Column({ default: true })
+  @Column({ default: true, select: false })
   active: boolean;
 
   @ManyToOne(() => UserRole, { lazy: true })

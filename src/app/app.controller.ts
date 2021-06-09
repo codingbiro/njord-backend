@@ -1,4 +1,4 @@
-import { controller, IAppController, HttpResponseNoContent, Hook, Options, Config, Context, Get, HttpResponseOK, dependency, ServiceManager } from '@foal/core';
+import { controller, IAppController, HttpResponseNoContent, Hook, Options, Config, Context, Get, HttpResponseOK, dependency } from '@foal/core';
 import { JWTOptional } from '@foal/jwt';
 
 import { AuthController, JobController } from './controllers';
