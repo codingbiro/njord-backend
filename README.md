@@ -38,4 +38,4 @@ password: `admin`
 - GET **/job/all?rejected=true&location=Lyngby**: returns all jobs or accepts query params to filter the jobs
 - GET **/job/locations**: returns all locations that are set on jobs (returns an unique list)
 - POST **/job/accept**: accepts the job that is sent in the request's body (identified by the object's id)
-- POST **/job/accept**: rejects the job that is sent in the request's body (identified by the object's id)
+- POST **/job/reject**: rejects the job that is sent in the request's body (identified by the object's id)
